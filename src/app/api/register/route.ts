@@ -14,15 +14,18 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Authorization header is required" }, { status: 401 })
   }
   const decodeResult = await decodeIdToken(idToken.split(":")[1])
+  console.log("decodeResult:" + JSON.stringify(decodeResult))
 
   // ReqBodyの取得
   const reqBody: PostReqType = await request.json()
+  console.log("reqBody:" + JSON.stringify(reqBody))
 
   // 登録済みのデータかどうかの確認
   const duplicateCheckSnap = await getDoc(doc(db, "users", decodeResult.sub))
   if (duplicateCheckSnap.exists()) {
     return NextResponse.json({ error: "User already exists" }, { status: 400 })
   }
+  console.log("duplicateCheckSnap:" + JSON.stringify(duplicateCheckSnap.exists()))
 
   // 登録用データの成形
   const date = new Date().getTime()
@@ -36,6 +39,7 @@ export async function POST(request: Request) {
   // データの追加 
   try {
     const docSnap = await addDoc(collection(db, "users"), user)
+    console.log("docSnap:" + JSON.stringify(docSnap))
     return NextResponse.json({}, { status: 200 })
   } catch (error) {
     return NextResponse.json({ error: JSON.stringify(error) }, { status: 500 })
