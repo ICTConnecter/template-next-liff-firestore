@@ -7,6 +7,8 @@ import { User } from '@/types/firestore/User';
 
 export async function POST(request: Request) {
 
+  console.log("登録リクエストを受け付けました")
+
   // tokenの検証
   const header = request.headers
   const idToken = header.get("Authorization")?.split(":")[1]
