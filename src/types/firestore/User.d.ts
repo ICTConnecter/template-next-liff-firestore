@@ -4,5 +4,5 @@ export type User = {
     createAt: number;
     updateAt: number;
     // 目的に合わせて項目を追加
-    todo: string[];
+    like: string[];
 }
