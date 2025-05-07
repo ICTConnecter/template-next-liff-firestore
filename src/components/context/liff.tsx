@@ -59,6 +59,7 @@ export const LiffComponent = ({ children }: Props) => {
         }
       })
       .catch((error: Error) => {
+        console.log(error)
         setLiffError(true)
       });
   }, []);

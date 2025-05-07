@@ -9,6 +9,6 @@ export async function POST(request: Request) {
   try {
     return NextResponse.json({ id: docSnap.id })
   } catch (error) {
-    return NextResponse.json({ error: "Failed to redirect" }, { status: 500 })
+    return NextResponse.json({ error: JSON.stringify(error) }, { status: 500 })
   }
 }
