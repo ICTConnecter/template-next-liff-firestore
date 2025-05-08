@@ -36,7 +36,11 @@ export const UserAuthComponent = ({ children }: Props) => {
     fetch(
       "/api/auth",
       {
-        headers: { 'Authorization': `Bearer:${token}` }
+        method: "GET",
+        headers: {
+          'Authorization': `Bearer:${token}`,
+          'Content-Type': 'application/json',
+        },
       }
     )
       .then(async (r) => {
