@@ -18,10 +18,11 @@ export async function GET(req: NextRequest) {
     const tokeDecodeResult = await decodeIdToken(token)
 
     const q = query(
-      collection(db, "supporter"),
+      collection(db, "users"),
       where("lineId", "==", tokeDecodeResult.sub)
     );
     const querySnapshot = await getDocs(q);
+    console.log("querySnapshot:" + JSON.stringify(querySnapshot))
     if (querySnapshot.empty) {
       // 登録情報が無かった場合
       return NextResponse.json({ error: "登録情報が見当たりませんでした。" }, { status: 401 })
