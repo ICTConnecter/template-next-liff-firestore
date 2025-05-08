@@ -9,7 +9,8 @@ export async function GET(req: NextRequest) {
 
   try {
     // reqのBearerからtokenを受け取る
-    const token = req.headers.get("Authorization")
+    // const token = req.headers.get("Authorization")
+    const token = req.headers.get("Authorization")?.split(":")[1]
     if (!token) {
       return NextResponse.json({ error: "Tokenが設定されていません。" }, { status: 400 })
     }
