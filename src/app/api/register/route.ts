@@ -12,10 +12,11 @@ export async function POST(request: Request) {
   // tokenの検証
   const header = request.headers
   const idToken = header.get("Authorization")?.split(":")[1]
+  console.log("idToken:" + idToken)
   if (!idToken) {
     return NextResponse.json({ error: "Authorization header is required" }, { status: 401 })
   }
-  const decodeResult = await decodeIdToken(idToken.split(":")[1])
+  const decodeResult = await decodeIdToken(idToken)
   console.log("decodeResult:" + JSON.stringify(decodeResult))
 
   // ReqBodyの取得
