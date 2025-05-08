@@ -24,6 +24,8 @@ export const decodeIdToken = async (
     },
   }).then((r) => r.json());
 
+  console.log("result:" + JSON.stringify(result))
+
   if (result.error) {
     throw new Error();
   }
